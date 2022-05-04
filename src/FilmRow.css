@@ -1,0 +1,42 @@
+.FilmRow {
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 3fr;
+
+  margin-bottom: 0.2rem;
+  font-size: 0.5em;
+  background-color: white;
+}
+
+.FilmRow:hover {
+  cursor: pointer;
+}
+
+.FilmRow .fave {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  font-size: 2rem;
+  font-weight: 800;
+  padding: 0 0.2em;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+
+.FilmRow .film-summary {
+  padding: 0.5em 1.5em;
+  background-color: white;
+}
+
+.FilmRow .film-summary > h1 {
+  margin-bottom: 0.35em;
+}
+
+.FilmRow .film-summary > p {
+  font-size: 1.6em;
+  line-height: 1.35;
+  font-weight: 200;
+  margin-top: 0;
+}
