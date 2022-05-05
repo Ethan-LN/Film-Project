@@ -39,7 +39,7 @@ export const TMDB = {
         "id": 335984,
         "title": "Blade Runner 2049",
         "poster_path": "/cbRQVCia0urtv5UGsVFTdqLDIRv.jpg",
-        "backdrop_path": "/zfWPeRgYpRjPZLGwwkfnTfaFnNh.jpg",
+        "backdrop_path": "/sAtoMqDVhNDQBc3QJL3RF6hlhGq.jpg",
         "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
         "release_date": "2017-10-04"
     },
@@ -50,14 +50,6 @@ export const TMDB = {
         "backdrop_path": "/uuQpQ8VDOtVL2IO4y2pR58odkS5.jpg",
         "overview": "A couple's relationship is tested when uninvited guests arrive at their home, disrupting their tranquil existence.",
         "release_date": "2017-09-13"
-    },
-    {
-      "id": 374720,
-        "title": "Dunkirk",
-        "poster_path": "/bOXBV303Fgkzn2K4FeKDc0O31q4.jpg",
-        "backdrop_path": "/fudEG1VUWuOqleXv6NwCExK0VLy.jpg",
-        "overview": "The miraculous evacuation of Allied soldiers from Belgium, Britain, Canada and France, who were cut off and surrounded by the German army from the beaches and harbor of Dunkirk, France, between May 26th and June 4th 1940, during the Battle of France in World War II.",
-        "release_date": "2017-07-19"
     },
     {
       "id": 415842,

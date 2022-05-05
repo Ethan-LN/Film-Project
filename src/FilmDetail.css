@@ -38,10 +38,6 @@
   padding: 0.25em 1.5rem;
 }
 
-.FilmDetail .film-tagline {
-  line-height: 1.2;
-}
-
 .FilmDetail .film-detail-poster {
   float: right;
   width: 20%;

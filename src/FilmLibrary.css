@@ -52,21 +52,24 @@
 }
 
 .FilmLibrary .film-list-filter {
-  flex-basis: 50%;
   flex-grow: 1;
-  background-color: #ccc;
+  background-color: #bbb;
   color: white;
   text-align: center;
   font-size: 0.75em;
+  font-weight: bold;
   padding: 0.5em;
   margin: 0 0 0.1em;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  cursor: pointer;
+  border:none;
 }
 
 .FilmLibrary .film-list-filter:hover {
   background-color: hsl(177, 70%, 46%);
+}
+.FilmLibrary .film-list-filter:active {
+  background-color: rgb(40, 205, 197);
 }
 
 .FilmLibrary .film-list-filter.is-active {
