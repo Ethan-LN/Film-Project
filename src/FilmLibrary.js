@@ -20,7 +20,7 @@ function FilmLibrary() {
           </div>
         </div>
         <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="" />
+          <img src="https://image.tmdb.org/t/p/w780/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h1>TITLE</h1>
             <p>YEAR</p>
@@ -28,7 +28,7 @@ function FilmLibrary() {
           <button className="fave"><span className="material-icons">add_to_queue</span></button>
         </div>
         <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/pKESfn2Pdy0b7drvZHQb7UzgqoY.jpg" alt="" />
+          <img src="https://image.tmdb.org/t/p/w780/pKESfn2Pdy0b7drvZHQb7UzgqoY.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h1>TITLE</h1>
             <p>YEAR</p>
@@ -36,7 +36,7 @@ function FilmLibrary() {
           <button className="fave"><span className="material-icons">remove_from_queue</span></button>
         </div>
         <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/dN9LbVNNZFITwfaRjl4tmwGWkRg.jpg" alt="" />
+          <img src="https://image.tmdb.org/t/p/w780/dN9LbVNNZFITwfaRjl4tmwGWkRg.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h1>TITLE</h1>
             <p>YEAR</p>
