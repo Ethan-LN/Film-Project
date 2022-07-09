@@ -1,48 +1,53 @@
 .FilmRow {
-  display: grid;
+  display: flex;
   position: relative;
-  grid-template-columns: 1fr 3fr;
+  flex-direction: row;
+  height: 180px;
   padding: 0;
   text-align: left;
   margin-bottom: 2px;
   font-size: 12pt;
   background-color: white;
-  border: none;
 }
 
-.FilmRow:hover {
-  background-color: rgb(235, 250, 250);
-}
-
-.FilmRow .fave {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+.FilmRow .actions {
   display: flex;
-  height: 34px;
-  width: 34px;
+  align-items: flex-end;
+  justify-content: flex-end;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.FilmRow .action {
+  display: flex;
+  padding: 5px;
+  margin: 2px;
   align-items: center;
   justify-content: center;
   font-size: 12pt;
   font-weight: 800;
   background-color: transparent;
-  border: none;
+  border: 1px solid lightseagreen;
   border-radius: 5px;
 }
 
-.FilmRow .fave:hover {
+.FilmRow .action:hover {
   background-color: lightseagreen;
 }
 
-.FilmRow .fave:active {
+.FilmRow .action:active {
   background-color: rgb(40, 205, 197);
 }
 
 .FilmRow .film-summary {
-  padding: 0.5em 1.5em;
+  flex-grow: 1;
+  padding: 0.5em 0.5em;
+  display: flex;
+  flex-direction: column;
 }
 
 .FilmRow .film-summary > h3 {
+  margin-top: 0.35em;
   margin-bottom: 0.35em;
 }
 

@@ -19,30 +19,51 @@ function FilmLibrary() {
             <span className="section-count">1</span>
           </button>
         </div>
-        <button className="FilmRow">
+        <div className="FilmRow">
           <img src="https://image.tmdb.org/t/p/w780/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h3>TITLE</h3>
             <p>YEAR</p>
+            <div className="actions">
+              <button className="action">
+                <span className="material-icons">add_to_queue</span>
+              </button>
+              <button className="action">
+                <span className="material-icons">read_more</span>
+              </button>
+            </div>
           </div>
-          <button className="fave"><span className="material-icons">add_to_queue</span></button>
-        </button>
-        <button className="FilmRow">
+        </div>
+        <div className="FilmRow">
           <img src="https://image.tmdb.org/t/p/w780/pKESfn2Pdy0b7drvZHQb7UzgqoY.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h3>TITLE</h3>
             <p>YEAR</p>
+            <div className="actions">
+              <button className="action">
+                <span className="material-icons">remove_from_queue</span>
+              </button>
+              <button className="action">
+                <span className="material-icons">read_more</span>
+              </button>
+            </div>
           </div>
-          <button className="fave"><span className="material-icons">remove_from_queue</span></button>
-        </button>
-        <button className="FilmRow">
+        </div>
+        <div className="FilmRow">
           <img src="https://image.tmdb.org/t/p/w780/dN9LbVNNZFITwfaRjl4tmwGWkRg.jpg" alt="{film title} film poster" />
           <div className="film-summary">
             <h3>TITLE</h3>
             <p>YEAR</p>
+            <div className="actions">
+              <button className="action">
+                <span className="material-icons">add_to_queue</span>
+              </button>
+              <button className="action">
+                <span className="material-icons">read_more</span>
+              </button>
+            </div>
           </div>
-          <button className="fave"><span className="material-icons">add_to_queue</span></button>
-        </button>
+        </div>
       </div>
 
       <div className="film-details">
