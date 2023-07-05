@@ -1,4 +1,4 @@
-import './FilmDetail.css'
+import '../styles/FilmDetail.css'
 
 function FilmDetail(props) {
   return (

@@ -1,5 +1,5 @@
 import React from 'react'
-import './FilmRow.css'
+import '../styles/FilmRow.css'
 
 export const FilmRow = props => {
     const yearAndDate = new Date(props.releaseDate)

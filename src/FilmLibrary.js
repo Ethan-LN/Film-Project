@@ -1,10 +1,13 @@
-import FilmDetail from "./FilmDetail";
-
-import "./FilmLibrary.css";
+import FilmDetail from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
+import './styles/FilmDetail.css';
+import './FilmLibrary.css'
 import TMDB from "./TMDB";
+import { useState } from "react";
 
 function FilmLibrary() {
+  const [selectedFilm, setSelectedFilm] = useState(null)
+
   return (
     <div className="FilmLibrary">
       <div className="film-list">
