@@ -1,8 +1,8 @@
 import FilmDetail from "./FilmDetail";
 
-import './FilmLibrary.css'
-import './FilmRow.css'
-
+import "./FilmLibrary.css";
+import { FilmRow } from "./components/FilmRow";
+import TMDB from "./TMDB";
 
 function FilmLibrary() {
   return (
@@ -19,59 +19,25 @@ function FilmLibrary() {
             <span className="section-count">1</span>
           </button>
         </div>
-        <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/9E2y5Q7WlCVNEhP5GiVTjhEhx1o.jpg" alt="{film title} film poster" />
-          <div className="film-summary">
-            <h3>TITLE</h3>
-            <p>YEAR</p>
-            <div className="actions">
-              <button className="action">
-                <span className="material-icons">add_to_queue</span>
-              </button>
-              <button className="action">
-                <span className="material-icons">read_more</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/pKESfn2Pdy0b7drvZHQb7UzgqoY.jpg" alt="{film title} film poster" />
-          <div className="film-summary">
-            <h3>TITLE</h3>
-            <p>YEAR</p>
-            <div className="actions">
-              <button className="action">
-                <span className="material-icons">remove_from_queue</span>
-              </button>
-              <button className="action">
-                <span className="material-icons">read_more</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="FilmRow">
-          <img src="https://image.tmdb.org/t/p/w780/dN9LbVNNZFITwfaRjl4tmwGWkRg.jpg" alt="{film title} film poster" />
-          <div className="film-summary">
-            <h3>TITLE</h3>
-            <p>YEAR</p>
-            <div className="actions">
-              <button className="action">
-                <span className="material-icons">add_to_queue</span>
-              </button>
-              <button className="action">
-                <span className="material-icons">read_more</span>
-              </button>
-            </div>
-          </div>
-        </div>
+
+        {TMDB.films.map((film) => (
+          <FilmRow
+            key={film.id}
+            id={film.id}
+            title={film.title}
+            releaseDate={film.release_date}
+            overView={film.overview}
+            posterURL={film.poster_path}
+          />
+        ))}
       </div>
 
       <div className="film-details">
         <h1 className="section-title">DETAILS</h1>
-        <FilmDetail/>
+        <FilmDetail />
       </div>
     </div>
   );
 }
 
-export default FilmLibrary
+export default FilmLibrary;
