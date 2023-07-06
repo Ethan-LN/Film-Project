@@ -1,30 +1,43 @@
-import FilmDetail from "./components/FilmDetail";
-import { FilmDetailEmpty } from "./components/FilmDetail";
+import FilmDetail, {FilmDetailEmpty} from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
 import TMDB from "./TMDB";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function FilmLibrary() {
   const [selectedFilm, setSelectedFilm] = useState(null);
+  const [showFavorites, setShowFavorites] = useState([]);
+  const [updatedFilms, setUpdatedFilms] = useState(TMDB.films);
+
+  const allFilms = () => {
+    if (updatedFilms !== TMDB.films) {
+      setUpdatedFilms(TMDB.films);
+    }
+  };
+
+  const favoFilms = () => {
+    if (updatedFilms !== showFavorites) {
+      setUpdatedFilms(showFavorites);
+    }
+  };
 
   return (
     <div className="FilmLibrary">
       <div className="film-list">
         <h1 className="section-title">FILMS</h1>
         <div className="film-list-filters">
-          <button className="film-list-filter is-active">
+          <button className="film-list-filter is-active" onClick={allFilms}>
             ALL
-            <span className="section-count">3</span>
+            <span className="section-count">{TMDB.films.length}</span>
           </button>
-          <button className="film-list-filter">
+          <button className="film-list-filter" onClick={favoFilms}>
             FAVES
-            <span className="section-count">1</span>
+            <span className="section-count">{showFavorites.length}</span>
           </button>
         </div>
 
-        {TMDB.films.map((film) => (
+        {updatedFilms.map((film) => (
           <FilmRow
             key={film.id}
             id={film.id}
@@ -35,6 +48,8 @@ function FilmLibrary() {
             film={film}
             selectedFilm={selectedFilm}
             setSelectedFilm={setSelectedFilm}
+            showFavorites={showFavorites}
+            setShowFavorites={setShowFavorites}
           />
         ))}
       </div>
