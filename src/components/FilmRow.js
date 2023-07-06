@@ -5,6 +5,7 @@ import { useState } from "react";
 export const FilmRow = (props) => {
   const yearAndDate = new Date(props.releaseDate);
   const [favorite, setFavorite] = useState(null);
+  const [queueStatus,setQueueStatus] = useState("add_to_queue")
 
   const toggleReadMore = () => {
     if (props.selectedFilm !== props.film) {
@@ -16,16 +17,18 @@ export const FilmRow = (props) => {
   };
 
   const toggleFavorite = () => {
-    if (favorite !== "FAVO") {
-      setFavorite("FAVO");
+    if (favorite !== "FAVE") {
+      setFavorite("FAVE");
       const filmsList = [...props.showFavorites, props.film];
       props.setShowFavorites(filmsList);
+      setQueueStatus("remove_from_queue")
     }
 
-    if (favorite === "FAVO") {
+    if (favorite === "FAVE") {
       setFavorite(null);
       const filteredList = props.showFavorites.filter((f) => f !== props.film);
       props.setShowFavorites(filteredList);
+      setQueueStatus("add_to_queue")
     }
   };
 
@@ -40,7 +43,7 @@ export const FilmRow = (props) => {
         <p>{yearAndDate.getFullYear()}</p>
         <div className="actions">
           <button className="action" onClick={toggleFavorite}>
-            <span className="material-icons">add_to_queue</span>
+            <span className="material-icons">{queueStatus}</span>
           </button>
           <button className="action" onClick={toggleReadMore}>
             <span className="material-icons">read_more</span>
