@@ -17,14 +17,14 @@ export const FilmRow = (props) => {
   };
 
   const toggleFavorite = () => {
-    if (favorite !== "FAVE") {
-      setFavorite("FAVE");
+    if (favorite !== "FAVES") {
+      setFavorite("FAVES");
       const filmsList = [...props.showFavorites, props.film];
       props.setShowFavorites(filmsList);
       setQueueStatus("remove_from_queue")
     }
 
-    if (favorite === "FAVE") {
+    if (favorite === "FAVES") {
       setFavorite(null);
       const filteredList = props.showFavorites.filter((f) => f !== props.film);
       props.setShowFavorites(filteredList);
