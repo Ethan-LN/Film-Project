@@ -1,6 +1,6 @@
 import "../styles/FilmDetail.css";
 
-function FilmDetail(props) {
+export default function FilmDetail(props) {
   return (
     <div className="FilmDetail is-hydrated">
       <figure className="film-backdrop">
@@ -25,7 +25,7 @@ function FilmDetail(props) {
   );
 }
 
-function FilmDetailEmpty() {
+export function FilmDetailEmpty() {
   return (
     <div className="FilmDetail">
       <p>
@@ -36,5 +36,3 @@ function FilmDetailEmpty() {
   );
 }
 
-export default FilmDetail;
-export { FilmDetailEmpty };
