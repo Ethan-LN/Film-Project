@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/FilmRow.css";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export const FilmRow = (props) => {
   const yearAndDate = new Date(props.releaseDate);
@@ -31,6 +32,11 @@ export const FilmRow = (props) => {
       setQueueStatus("add_to_queue")
     }
   };
+
+  useEffect(()=>{
+    console.log(props.showFavorites)
+  },[props.showFavorites])
+  
 
   return (
     <div className="FilmRow">
