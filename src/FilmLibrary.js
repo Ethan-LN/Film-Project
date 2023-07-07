@@ -9,29 +9,41 @@ function FilmLibrary() {
   const [selectedFilm, setSelectedFilm] = useState(null);
   const [showFavorites, setShowFavorites] = useState([]);
   const [updatedFilms, setUpdatedFilms] = useState(TMDB.films);
+  const [isFavoFilmCategorySelected, setIsFavoFilmCategorySelected] = useState(false)
+  const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
 
   const allFilms = () => {
-    if (updatedFilms !== TMDB.films) {
       setUpdatedFilms(TMDB.films);
-    }
+      setIsFavoFilmCategorySelected(false)
   };
 
   const favoFilms = () => {
-    if (updatedFilms !== showFavorites) {
+    setUpdatedFilms(showFavorites);
+    setIsFavoFilmsClicked(true);
+    setIsFavoFilmCategorySelected(true)
+  };
+
+  useEffect(() => {
+    if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
     }
-  };
+     else {
+      setUpdatedFilms(TMDB.films);
+      setIsFavoFilmsClicked(false);
+      setIsFavoFilmCategorySelected(false);
+    }
+  }, [isFavoFilmsClicked, showFavorites]);
 
   return (
     <div className="FilmLibrary">
       <div className="film-list">
         <h1 className="section-title">FILMS</h1>
         <div className="film-list-filters">
-          <button className="film-list-filter is-active" onClick={allFilms}>
+          <button className={`film-list-filter ${!isFavoFilmsClicked ? "is-active" : ""}`} onClick={allFilms}>
             ALL
             <span className="section-count">{TMDB.films.length}</span>
           </button>
-          <button className="film-list-filter" onClick={favoFilms}>
+          <button className={`film-list-filter ${!isFavoFilmsClicked ? "is-active" : ""}`} onClick={favoFilms}>
             FAVES
             <span className="section-count">{showFavorites.length}</span>
           </button>
