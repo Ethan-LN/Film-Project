@@ -2,8 +2,8 @@ import FilmDetail, {FilmDetailEmpty} from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
-import TMDB from "./TMDB";
 import { useEffect, useState } from "react";
+import { TMDB, TMDB_API_KEY } from './TMDB';
 
 function FilmLibrary() {
   const [selectedFilm, setSelectedFilm] = useState(null);
@@ -11,6 +11,7 @@ function FilmLibrary() {
   const [updatedFilms, setUpdatedFilms] = useState(TMDB.films);
   const [isFavoFilmCategorySelected, setIsFavoFilmCategorySelected] = useState(false)
   const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
+  const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY
 
   const allFilms = () => {
       setUpdatedFilms(TMDB.films);
