@@ -12,6 +12,7 @@ export default function FilmDetail(props) {
       </figure>
 
       <div className="film-meta">
+        <h3>{props.tagline}</h3>
         <p className="film-detail-overview">
           <img
             src={`https://image.tmdb.org/t/p/w780/${props.posterURL}`}
@@ -35,4 +36,3 @@ export function FilmDetailEmpty() {
     </div>
   );
 }
-
