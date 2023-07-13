@@ -48,7 +48,7 @@ function FilmLibrary() {
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
-  }, [isFavoFilmsClicked, showFavorites]);
+  }, [isFavoFilmsClicked, showFavorites, isFavoFilmCategorySelected]);
 
   return (
     <div className="FilmLibrary">
