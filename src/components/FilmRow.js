@@ -6,14 +6,14 @@ import { useEffect } from "react";
 export const FilmRow = (props) => {
   const yearAndDate = new Date(props.releaseDate);
   const [favorite, setFavorite] = useState(null);
-  const [queueStatus,setQueueStatus] = useState("add_to_queue")
+  const [queueStatus, setQueueStatus] = useState("add_to_queue");
 
   const toggleReadMore = () => {
     if (props.selectedFilm !== props.film) {
-      props.setSelectedFilm(props.film);
+      props.getMovieDetail(props.id);
     }
     if (props.selectedFilm === props.film) {
-      props.setSelectedFilm(null);
+      props.getMovieDetail("");
     }
   };
 
@@ -22,21 +22,18 @@ export const FilmRow = (props) => {
       setFavorite("FAVES");
       const filmsList = [...props.showFavorites, props.film];
       props.setShowFavorites(filmsList);
-      setQueueStatus("remove_from_queue")
+      setQueueStatus("remove_from_queue");
     }
 
     if (favorite === "FAVES") {
       setFavorite(null);
       const filteredList = props.showFavorites.filter((f) => f !== props.film);
       props.setShowFavorites(filteredList);
-      setQueueStatus("add_to_queue")
+      setQueueStatus("add_to_queue");
     }
   };
 
-  useEffect(()=>{
-    console.log(props.showFavorites)
-  },[props.showFavorites])
-  
+  useEffect(() => {}, [props.showFavorites]);
 
   return (
     <div className="FilmRow">
