@@ -12,6 +12,7 @@ function FilmLibrary() {
   const [isFavoFilmCategorySelected, setIsFavoFilmCategorySelected] =
     useState(false);
   const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const BearerToken = process.env.REACT_APP_BearerToken;
@@ -50,11 +51,28 @@ function FilmLibrary() {
       .catch((err) => console.error(err));
   };
 
+  const loadMoreFilms = () => {
+    setPageNumber(pageNumber+1);
+  }
+
+  const fetchMovies = async () => {
+    try {
+      const response = await fetch(
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2022&sort_by=popularity.desc&page=${pageNumber}`,
+        options
+      );
+      const data = await response.json();
+      setFetchedFilms(prevFilms => [...prevFilms, ...data.results]);
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   useEffect(() => {
     if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
     } else {
-      setUpdatedFilms(fetchedFilms);
+      // setUpdatedFilms(fetchedFilms);
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
@@ -66,23 +84,11 @@ function FilmLibrary() {
   ]);
 
   useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        const response = await fetch(
-          "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2022&sort_by=popularity.desc",
-          options
-        );
-        const data = await response.json();
-        setFetchedFilms(data.results);
-      } catch (err) {
-        console.error(err);
-      }
-    };
     fetchMovies();
-  }, [options]);
+  }, [options,pageNumber]);
 
   useEffect(() => {
-    setUpdatedFilms(fetchedFilms);
+    setUpdatedFilms(fetchedFilms)
   }, [fetchedFilms]);
 
   return (
@@ -129,13 +135,13 @@ function FilmLibrary() {
         <div className="load__more">
           <button
             className="button__extend" 
-            onClick={() => console.log("load more movie")}
+            onClick={loadMoreFilms}
           >
             LOAD MORE
           </button>
           <button
             className="button__extend"
-            onClick={() => console.log("load more movie")}
+            onClick={() => console.log("Choose year")}
           >
             CHOOSE YEAR
           </button>
