@@ -126,6 +126,20 @@ function FilmLibrary() {
             getMovieDetail={getMovieDetail}
           />
         ))}
+        <div className="load__more">
+          <button
+            className="button__extend" 
+            onClick={() => console.log("load more movie")}
+          >
+            LOAD MORE
+          </button>
+          <button
+            className="button__extend"
+            onClick={() => console.log("load more movie")}
+          >
+            CHOOSE YEAR
+          </button>
+        </div>
       </div>
 
       <div className="film-details">
