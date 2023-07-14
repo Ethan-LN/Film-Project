@@ -24,7 +24,7 @@ function FilmLibrary() {
         Authorization: `Bearer ${BearerToken}`,
       },
     }),
-    []
+    [BearerToken]
   );
 
   const allFilms = () => {
@@ -55,19 +55,6 @@ function FilmLibrary() {
     setPageNumber(pageNumber+1);
   }
 
-  const fetchMovies = async () => {
-    try {
-      const response = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2022&sort_by=popularity.desc&page=${pageNumber}`,
-        options
-      );
-      const data = await response.json();
-      setFetchedFilms(prevFilms => [...prevFilms, ...data.results]);
-    } catch (err) {
-      console.error(err);
-    }
-  }
-
   useEffect(() => {
     if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
@@ -84,6 +71,18 @@ function FilmLibrary() {
   ]);
 
   useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2022&sort_by=popularity.desc&page=${pageNumber}`,
+          options
+        );
+        const data = await response.json();
+        setFetchedFilms(prevFilms => [...prevFilms, ...data.results]);
+      } catch (err) {
+        console.error(err);
+      }
+    }
     fetchMovies();
   }, [options,pageNumber]);
 
