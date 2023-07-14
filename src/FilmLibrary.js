@@ -14,13 +14,13 @@ function FilmLibrary() {
   const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
+  const BearerToken = process.env.REACT_APP_BearerToken;
   const options = useMemo(
     () => ({
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzk4MWU3MzU3OGM4NjA2M2JkNDEzOGMzOTVjNjA3NCIsInN1YiI6IjY0YWU4ZmI5NjZhMGQzMDBlMzc2MzVmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9OfkxY7ueaHH2iVbzyk6-J3Hmg3sIUtRlkp2W_hAkj8",
+        Authorization: `Bearer ${BearerToken}`,
       },
     }),
     []
