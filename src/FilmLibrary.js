@@ -2,7 +2,7 @@ import FilmDetail, { FilmDetailEmpty } from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 
 function FilmLibrary() {
   const [selectedFilm, setSelectedFilm] = useState("");
@@ -14,14 +14,17 @@ function FilmLibrary() {
   const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
-  const options = {
-    method: "GET",
-    headers: {
-      accept: "application/json",
-      Authorization:
-        "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzk4MWU3MzU3OGM4NjA2M2JkNDEzOGMzOTVjNjA3NCIsInN1YiI6IjY0YWU4ZmI5NjZhMGQzMDBlMzc2MzVmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9OfkxY7ueaHH2iVbzyk6-J3Hmg3sIUtRlkp2W_hAkj8",
-    },
-  };
+  const options = useMemo(
+    () => ({
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYzk4MWU3MzU3OGM4NjA2M2JkNDEzOGMzOTVjNjA3NCIsInN1YiI6IjY0YWU4ZmI5NjZhMGQzMDBlMzc2MzVmNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.9OfkxY7ueaHH2iVbzyk6-J3Hmg3sIUtRlkp2W_hAkj8",
+      },
+    }),
+    []
+  );
 
   const allFilms = () => {
     setUpdatedFilms(fetchedFilms);
@@ -55,7 +58,12 @@ function FilmLibrary() {
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
-  }, [isFavoFilmsClicked, showFavorites, isFavoFilmCategorySelected]);
+  }, [
+    isFavoFilmsClicked,
+    showFavorites,
+    isFavoFilmCategorySelected,
+    fetchedFilms,
+  ]);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -70,13 +78,12 @@ function FilmLibrary() {
         console.error(err);
       }
     };
-
     fetchMovies();
-  }, []);
+  }, [options]);
 
-  useEffect(()=> {
-    setUpdatedFilms(fetchedFilms)
-  },[fetchedFilms])
+  useEffect(() => {
+    setUpdatedFilms(fetchedFilms);
+  }, [fetchedFilms]);
 
   return (
     <div className="FilmLibrary">
