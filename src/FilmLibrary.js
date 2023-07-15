@@ -3,6 +3,7 @@ import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
 import { useEffect, useState, useMemo } from "react";
+import { YearCalendar } from "./components/YearCalendar";
 
 function FilmLibrary() {
   const [selectedFilm, setSelectedFilm] = useState("");
@@ -12,6 +13,10 @@ function FilmLibrary() {
   const [isFavoFilmCategorySelected, setIsFavoFilmCategorySelected] =
     useState(false);
   const [isFavoFilmsClicked, setIsFavoFilmsClicked] = useState(false);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [selectedYear, setSelectedYear] = useState(2022);
+  const [prevSelectedYear, setPrevSelectedYear] = useState(2022);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const BearerToken = process.env.REACT_APP_BearerToken;
@@ -23,7 +28,7 @@ function FilmLibrary() {
         Authorization: `Bearer ${BearerToken}`,
       },
     }),
-    []
+    [BearerToken]
   );
 
   const allFilms = () => {
@@ -50,11 +55,23 @@ function FilmLibrary() {
       .catch((err) => console.error(err));
   };
 
+  const loadMoreFilms = () => {
+    setPageNumber(pageNumber + 1);
+  };
+
+  const handleModalOpen = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   useEffect(() => {
     if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
     } else {
-      setUpdatedFilms(fetchedFilms);
+      // setUpdatedFilms(fetchedFilms);
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
@@ -69,7 +86,30 @@ function FilmLibrary() {
     const fetchMovies = async () => {
       try {
         const response = await fetch(
-          "https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=2022&sort_by=popularity.desc",
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=${selectedYear}&sort_by=popularity.desc&page=${pageNumber}`,
+          options
+        );
+
+        const data = await response.json();
+        if (pageNumber === 1) {
+          // If pageNumber is 1, replace the fetched films with new results
+          setFetchedFilms(data.results);
+        } else {
+          // If pageNumber is greater than 1, append the new results to existing films
+          setFetchedFilms((prevFilms) => [...prevFilms, ...data.results]);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+    fetchMovies();
+  }, [options, pageNumber]);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&primary_release_year=${selectedYear}&sort_by=popularity.desc&page=${pageNumber}`,
           options
         );
         const data = await response.json();
@@ -79,11 +119,15 @@ function FilmLibrary() {
       }
     };
     fetchMovies();
-  }, [options]);
+  }, [options, selectedYear]);
 
   useEffect(() => {
     setUpdatedFilms(fetchedFilms);
   }, [fetchedFilms]);
+
+  useEffect(() => {
+    setPrevSelectedYear(prevSelectedYear);
+  }, [prevSelectedYear]);
 
   return (
     <div className="FilmLibrary">
@@ -126,6 +170,25 @@ function FilmLibrary() {
             getMovieDetail={getMovieDetail}
           />
         ))}
+        <div className="load__more">
+          <button className="button__extend" onClick={loadMoreFilms}>
+            LOAD MORE
+          </button>
+          <button className="button__extend" onClick={handleModalOpen}>
+            CHOOSE YEAR
+          </button>
+          {isModalOpen && (
+            <YearCalendar
+              selectedYear={selectedYear}
+              setSelectedYear={setSelectedYear}
+              prevSelectedYear={prevSelectedYear}
+              setPrevSelectedYear={setPrevSelectedYear}
+              pageNumber={pageNumber}
+              setPageNumber={setPageNumber}
+              onClose={handleModalClose}
+            />
+          )}
+        </div>
       </div>
 
       <div className="film-details">
