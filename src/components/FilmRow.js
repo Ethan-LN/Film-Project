@@ -2,6 +2,7 @@ import React from "react";
 import "../styles/FilmRow.css";
 import { useState } from "react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export const FilmRow = (props) => {
   const yearAndDate = new Date(props.releaseDate);
@@ -46,10 +47,14 @@ export const FilmRow = (props) => {
         <p>{yearAndDate.getFullYear()}</p>
         <div className="actions">
           <button className="action" onClick={toggleFavorite}>
+            <Link>
             <span className="material-icons">{queueStatus}</span>
+            </Link>
           </button>
           <button className="action" onClick={toggleReadMore}>
-            <span className="material-icons">read_more</span>
+            <Link to={`/films/${props.film.id}`} >
+              <span className="material-icons">read_more</span>
+            </Link>
           </button>
         </div>
       </div>
