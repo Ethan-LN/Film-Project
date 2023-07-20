@@ -1,4 +1,3 @@
-
 .FilmLibrary {
   position: relative;
   display: flex;
@@ -62,7 +61,7 @@
   margin: 0 0 0.1em;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  border:none;
+  border: none;
 }
 
 .FilmLibrary .film-list-filter:hover {
@@ -118,7 +117,7 @@
   margin: 0 0 0.1em;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  border:none;
+  border: none;
 }
 
 .button__extend:hover {
