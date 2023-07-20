@@ -1,0 +1,42 @@
+.HomePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1543536448-d209d2d13a1c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80");
+    background-size: cover;
+    font-family: Arial, sans-serif;
+  }
+  
+  .HomePage h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .HomePage p {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .HomePage button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .HomePage button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Optional: Add some extra styles for button click effect */
+  .HomePage button:active {
+    background-color: #004599;
+  }
+  
