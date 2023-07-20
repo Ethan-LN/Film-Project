@@ -1,11 +1,11 @@
-import FilmDetail, { FilmDetailEmpty } from "./components/FilmDetail";
+import { FilmDetailEmpty } from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
 import { useEffect, useState, useMemo } from "react";
 import { YearCalendar } from "./components/YearCalendar";
 import { Outlet } from "react-router-dom";
-
+import { useParams } from "react-router-dom";
 function FilmLibrary({ onSelectFilm }) {
   const [selectedFilm, setSelectedFilm] = useState("");
   const [showFavorites, setShowFavorites] = useState([]);
@@ -21,6 +21,7 @@ function FilmLibrary({ onSelectFilm }) {
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const BearerToken = process.env.REACT_APP_BearerToken;
+  const params = useParams()
   const options = useMemo(
     () => ({
       method: "GET",
@@ -130,6 +131,10 @@ function FilmLibrary({ onSelectFilm }) {
     setPrevSelectedYear(prevSelectedYear);
   }, [prevSelectedYear]);
 
+  useEffect(() => {
+    getMovieDetail(params.filmID)
+    console.log(params.filmID)
+  },[])
   return (
     <div className="FilmLibrary">
       <div className="film-list">

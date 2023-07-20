@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import FilmLibrary from "./FilmLibrary";
 import { HomePage } from "./components/HomePage";
 import { NotFoundPage } from "./components/NotFoundPage";
-import FilmDetail, { FilmDetailEmpty } from "./components/FilmDetail";
+import FilmDetail from "./components/FilmDetail";
 import { useState } from "react";
 
 function App() {
