@@ -47,7 +47,9 @@ export const FilmRow = (props) => {
         <p>{yearAndDate.getFullYear()}</p>
         <div className="actions">
           <button className="action" onClick={toggleFavorite}>
+            <Link>
             <span className="material-icons">{queueStatus}</span>
+            </Link>
           </button>
           <button className="action" onClick={toggleReadMore}>
             <Link to={`/films/${props.film.id}`} >

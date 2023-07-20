@@ -1,0 +1,36 @@
+/* NotFoundPage.css */
+.notFoundPage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1597945161640-9366e6d4253b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"); /* Path to your image file */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .notFoundContent {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Add a semi-transparent white background for readability */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Add a subtle shadow effect */
+  }
+  
+  .notFoundContent h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  
+  .notFoundContent p {
+    font-size: 1.2rem;
+  }
+  
+  /* Optional: Add some responsive styles if needed */
+  @media (max-width: 768px) {
+    .notFoundContent {
+      max-width: 80%;
+    }
+  }
+  
