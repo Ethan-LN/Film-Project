@@ -21,7 +21,7 @@ function FilmLibrary({ onSelectFilm }) {
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const BearerToken = process.env.REACT_APP_BearerToken;
-  const params = useParams()
+  const params = useParams();
   const options = useMemo(
     () => ({
       method: "GET",
@@ -45,17 +45,19 @@ function FilmLibrary({ onSelectFilm }) {
   };
 
   const getMovieDetail = async (movieID) => {
-    await fetch(
-      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_API_KEY}&language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setSelectedFilm(response);
-        onSelectFilm(response);
-        // Set the selectedFilm state
-      })
-      .catch((err) => console.error(err));
+    if (movieID) {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_API_KEY}&language=en-US`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          setSelectedFilm(response);
+          onSelectFilm(response);
+          // Set the selectedFilm state
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const loadMoreFilms = () => {
@@ -132,9 +134,9 @@ function FilmLibrary({ onSelectFilm }) {
   }, [prevSelectedYear]);
 
   useEffect(() => {
-    getMovieDetail(params.filmID)
-    console.log(params.filmID)
-  },[])
+    getMovieDetail(params.filmID);
+  }, []);
+
   return (
     <div className="FilmLibrary">
       <div className="film-list">
@@ -199,7 +201,7 @@ function FilmLibrary({ onSelectFilm }) {
 
       <div className="film-details">
         <h1 className="section-title">DETAILS</h1>
-        {selectedFilm === "" ? <FilmDetailEmpty /> : <Outlet />}
+        {!selectedFilm ? <FilmDetailEmpty /> : <Outlet />}
       </div>
     </div>
   );
