@@ -1,11 +1,12 @@
-import FilmDetail, { FilmDetailEmpty } from "./components/FilmDetail";
+import { FilmDetailEmpty } from "./components/FilmDetail";
 import { FilmRow } from "./components/FilmRow";
 import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
 import { useEffect, useState, useMemo } from "react";
 import { YearCalendar } from "./components/YearCalendar";
-
-function FilmLibrary() {
+import { Outlet } from "react-router-dom";
+import { useParams } from "react-router-dom";
+function FilmLibrary({ onSelectFilm }) {
   const [selectedFilm, setSelectedFilm] = useState("");
   const [showFavorites, setShowFavorites] = useState([]);
   const [fetchedFilms, setFetchedFilms] = useState([]);
@@ -20,6 +21,7 @@ function FilmLibrary() {
 
   const TMDB_API_KEY = process.env.REACT_APP_TMDB_API_KEY;
   const BearerToken = process.env.REACT_APP_BearerToken;
+  const params = useParams();
   const options = useMemo(
     () => ({
       method: "GET",
@@ -43,16 +45,19 @@ function FilmLibrary() {
   };
 
   const getMovieDetail = async (movieID) => {
-    await fetch(
-      `https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_API_KEY}&language=en-US`,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => {
-        setSelectedFilm(response);
-        // Set the selectedFilm state
-      })
-      .catch((err) => console.error(err));
+    if (movieID) {
+      await fetch(
+        `https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_API_KEY}&language=en-US`,
+        options
+      )
+        .then((response) => response.json())
+        .then((response) => {
+          setSelectedFilm(response);
+          onSelectFilm(response);
+          // Set the selectedFilm state
+        })
+        .catch((err) => console.error(err));
+    }
   };
 
   const loadMoreFilms = () => {
@@ -71,7 +76,6 @@ function FilmLibrary() {
     if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
     } else {
-      // setUpdatedFilms(fetchedFilms);
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
@@ -128,6 +132,10 @@ function FilmLibrary() {
   useEffect(() => {
     setPrevSelectedYear(prevSelectedYear);
   }, [prevSelectedYear]);
+
+  useEffect(() => {
+    getMovieDetail(params.filmID);
+  }, []);
 
   return (
     <div className="FilmLibrary">
@@ -193,17 +201,7 @@ function FilmLibrary() {
 
       <div className="film-details">
         <h1 className="section-title">DETAILS</h1>
-        {selectedFilm === "" ? (
-          <FilmDetailEmpty />
-        ) : (
-          <FilmDetail
-            title={selectedFilm.original_title}
-            posterURL={selectedFilm.poster_path}
-            backDropURL={selectedFilm.backdrop_path}
-            tagline={selectedFilm.tagline}
-            overView={selectedFilm.overview}
-          />
-        )}
+        {!selectedFilm ? <FilmDetailEmpty /> : <Outlet />}
       </div>
     </div>
   );
