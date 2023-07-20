@@ -8,17 +8,14 @@ export const YearCalendar = (props) => {
   const maxYear = currentYear; // Set the maximum year
 
   const handleYearChange = (date) => {
-
     props.setPrevSelectedYear(props.selectedYear);
-
     props.setSelectedYear(date.getFullYear().toString());
 
     if (props.prevSelectedYear === props.selectedYear) {
-        return;
+      return;
     } else {
-        props.setPageNumber(1);
+      props.setPageNumber(1);
     }
-  
   };
 
   const handleModalClose = () => {

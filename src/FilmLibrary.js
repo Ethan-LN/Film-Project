@@ -4,8 +4,9 @@ import "./styles/FilmDetail.css";
 import "./FilmLibrary.css";
 import { useEffect, useState, useMemo } from "react";
 import { YearCalendar } from "./components/YearCalendar";
+import { Outlet } from "react-router-dom";
 
-function FilmLibrary() {
+function FilmLibrary({ onSelectFilm }) {
   const [selectedFilm, setSelectedFilm] = useState("");
   const [showFavorites, setShowFavorites] = useState([]);
   const [fetchedFilms, setFetchedFilms] = useState([]);
@@ -50,6 +51,7 @@ function FilmLibrary() {
       .then((response) => response.json())
       .then((response) => {
         setSelectedFilm(response);
+        onSelectFilm(response);
         // Set the selectedFilm state
       })
       .catch((err) => console.error(err));
@@ -71,7 +73,6 @@ function FilmLibrary() {
     if (isFavoFilmCategorySelected & isFavoFilmsClicked) {
       setUpdatedFilms(showFavorites);
     } else {
-      // setUpdatedFilms(fetchedFilms);
       setIsFavoFilmsClicked(false);
       setIsFavoFilmCategorySelected(false);
     }
@@ -193,17 +194,7 @@ function FilmLibrary() {
 
       <div className="film-details">
         <h1 className="section-title">DETAILS</h1>
-        {selectedFilm === "" ? (
-          <FilmDetailEmpty />
-        ) : (
-          <FilmDetail
-            title={selectedFilm.original_title}
-            posterURL={selectedFilm.poster_path}
-            backDropURL={selectedFilm.backdrop_path}
-            tagline={selectedFilm.tagline}
-            overView={selectedFilm.overview}
-          />
-        )}
+        {selectedFilm === "" ? <FilmDetailEmpty /> : <Outlet />}
       </div>
     </div>
   );
