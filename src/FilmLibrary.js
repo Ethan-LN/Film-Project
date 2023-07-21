@@ -6,6 +6,7 @@ import { useEffect, useState, useMemo } from "react";
 import { YearCalendar } from "./components/YearCalendar";
 import { Outlet } from "react-router-dom";
 import { useParams } from "react-router-dom";
+import { NotFoundPage } from "./components/NotFoundPage";
 function FilmLibrary({ onSelectFilm }) {
   const [selectedFilm, setSelectedFilm] = useState("");
   const [showFavorites, setShowFavorites] = useState([]);
@@ -50,7 +51,14 @@ function FilmLibrary({ onSelectFilm }) {
         `https://api.themoviedb.org/3/movie/${movieID}?api_key=${TMDB_API_KEY}&language=en-US`,
         options
       )
-        .then((response) => response.json())
+        .then((response) => {
+          if (!response.ok) {
+            // If the response is not ok (404 or other errors), display NotFoundPage
+            setSelectedFilm(404); // Set selectedFilm as null to indicate not found
+            throw new Error("Movie not found");
+          }
+          return response.json();
+        })
         .then((response) => {
           setSelectedFilm(response);
           onSelectFilm(response);
@@ -201,7 +209,7 @@ function FilmLibrary({ onSelectFilm }) {
 
       <div className="film-details">
         <h1 className="section-title">DETAILS</h1>
-        {!selectedFilm ? <FilmDetailEmpty /> : <Outlet />}
+        {!selectedFilm ? <FilmDetailEmpty /> : selectedFilm===404 ? <NotFoundPage/> : <Outlet />}
       </div>
     </div>
   );
